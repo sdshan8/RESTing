@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/sdshan8/RESTing/issues"
   },
-  "homepage": "https://sdshan8.github.io/RESTing",
+  "homepage": "https://github.com/sdshan8/RESTing",
   "dependencies": {
     "@picocss/pico": "^1.5.6",
     "code-prettify": "^0.1.0"

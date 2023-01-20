@@ -1,5 +1,5 @@
 # RESTing
-RESTing is a web-based rest API client.
+RESTing is a web-based rest API client meant for testing local services
 Note: it only supports json as of now.
 
 This uses Google's [Code Prettify](https://github.com/googlearchive/code-prettify) for Syntex highlighting,
