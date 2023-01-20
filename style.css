@@ -1,0 +1,30 @@
+* {
+  transition: all 100ms ease;
+}
+strong {
+  font-size: 20px;
+}
+:root {
+  --block-spacing-vertical: 0;
+}
+textarea {
+  padding: 0.5rem;
+}
+code {
+  width: 100%;
+  background: var(--code-background-color)!important;
+}
+.output-div, #loading {
+  display: none;
+}
+.data {
+  display: none;
+}
+button {
+  padding: 0.5rem!important;
+}
+select {
+  padding-top: 0.5rem!important;
+  padding-bottom: 0.5rem!important;
+}
+

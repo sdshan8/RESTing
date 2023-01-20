@@ -1,0 +1,23 @@
+{
+  "name": "resting",
+  "version": "1.0.0",
+  "description": "RESTing is a web-based rest API client",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdshan8/RESTing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sdshan8/RESTing/issues"
+  },
+  "homepage": "https://sdshan8.github.io/RESTing",
+  "dependencies": {
+    "@picocss/pico": "^1.5.6",
+    "code-prettify": "^0.1.0"
+  }
+}

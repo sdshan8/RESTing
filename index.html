@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="node_modules/@picocss/pico/css/pico.min.css" type="text/css" media="all">
+  <!--<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">-->
+  <script src="node_modules/code-prettify/loader/run_prettify.js?autorun=false&skin=sunburst"></script>
+  <!--<script src="https://cdn.jsdelivr.net/gh/google/code-prettify/loader/run_prettify.js?autorun=false&skin=sunburst"></script>-->
+  <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+  <title>RESTing</title>
+</head>
+<body>
+<nav class="container-fluid">
+  <ul>
+    <li>
+      <a href="https://github.com/sdshan8/RESTing" class="contrast">
+        <strong>RESTing</strong>
+      </a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <select name="method" id="method">
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="PATCH">PATCH</option>
+        <option value="DELETE">DELETE</option>
+        <option value="HEAD">HEAD</option>
+        <option value="PUT">PUT</option>
+        <!--option value="CONNECT">CONNECT</option>
+        <option value="TRACE">TRACE</option>
+        <option value="OPTIONS">OPTIONS</option-->
+      </select>
+    </li>
+    <li>
+      <button type="submit" form="inputs" id="send">SEND</button>
+    </li>
+  </ul>
+</nav>
+<main class="container">
+  <form id="inputs" onsubmit="event.preventDefault()">
+    
+    <label for="url">End Point</label>
+    <input
+    type="url"
+    name="url"
+    id="url"
+    placeholder="https://example.com/teapot"
+    required
+    value="http://localhost"
+    />
+    <label for="header">Header</label>
+    <textarea
+    type="text"
+    name="header"
+    id=header
+    rows="2"
+    ></textarea>
+    <div class="data">
+      <label class="data" for="data">Data</label>
+      <textarea
+      name="data"
+      id="data"
+      rows="7"
+      placeholder='Example:&#13;&#10;{&#13;&#10;&nbsp;&nbsp;"key":"value",&#13;&#10;&nbsp;&nbsp;"secret":"403"&#13;&#10;}'
+      ></textarea>
+    </div>
+    <progress id="loading"></progress>
+  </form>
+  <div class="output-div">
+    <h6>Response</h6>
+    <label>Header</label>
+    <pre><code id="rx-header"></code></pre>
+    <label>Status</label>
+    <pre><code id=status ></code></pre>
+    <label>Body</label>
+    <pre><code id="response" class="prettyprint"></code></pre>
+  </div>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
