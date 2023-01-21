@@ -14,7 +14,7 @@ code {
   width: 100%;
   background: var(--code-background-color)!important;
 }
-.output-div, #loading {
+.output-div {
   display: none;
 }
 .data {
@@ -27,4 +27,3 @@ select {
   padding-top: 0.5rem!important;
   padding-bottom: 0.5rem!important;
 }
-

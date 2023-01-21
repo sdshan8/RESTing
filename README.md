@@ -2,8 +2,7 @@
 RESTing is a web-based rest API client meant for testing local services
 Note: it only supports json as of now.
 
-This uses Google's [Code Prettify](https://github.com/googlearchive/code-prettify) for Syntex highlighting,
-And [picocss](https://picocss.com/) for Styling.
+This uses [picocss](https://picocss.com/) for Styling.
 
 # Setup
 Clone this repository

@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="node_modules/@picocss/pico/css/pico.min.css" type="text/css" media="all">
   <!--<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">-->
-  <script src="node_modules/code-prettify/loader/run_prettify.js?autorun=false&skin=sunburst"></script>
-  <!--<script src="https://cdn.jsdelivr.net/gh/google/code-prettify/loader/run_prettify.js?autorun=false&skin=sunburst"></script>-->
   <link rel="stylesheet" href="style.css" type="text/css" media="all" />
   <title>RESTing</title>
 </head>
@@ -40,13 +38,12 @@
 </nav>
 <main class="container">
   <form id="inputs" onsubmit="event.preventDefault()">
-    
     <label for="url">End Point</label>
     <input
     type="url"
     name="url"
     id="url"
-    placeholder="https://example.com/teapot"
+    placeholder="https://example.com/api/v2/teapot"
     required
     value="http://localhost"
     />
@@ -55,8 +52,12 @@
     type="text"
     name="header"
     id=header
-    rows="2"
+    rows="6"
     ></textarea>
+    <label for="fetch">
+      <input type="checkbox" id="fetch" name="fetch" role="switch" checked>
+      Use Fetch API
+    </label>
     <div class="data">
       <label class="data" for="data">Data</label>
       <textarea
@@ -66,7 +67,6 @@
       placeholder='Example:&#13;&#10;{&#13;&#10;&nbsp;&nbsp;"key":"value",&#13;&#10;&nbsp;&nbsp;"secret":"403"&#13;&#10;}'
       ></textarea>
     </div>
-    <progress id="loading"></progress>
   </form>
   <div class="output-div">
     <h6>Response</h6>
@@ -75,7 +75,7 @@
     <label>Status</label>
     <pre><code id=status ></code></pre>
     <label>Body</label>
-    <pre><code id="response" class="prettyprint"></code></pre>
+    <pre><code id="response"></code></pre>
   </div>
 </main>
 <script src="script.js"></script>
