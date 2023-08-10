@@ -19,16 +19,13 @@
   </ul>
   <ul>
     <li>
-      <select name="method" id="method">
+      <select name="method" id="method" form="inputs">
         <option value="GET">GET</option>
         <option value="POST">POST</option>
         <option value="PATCH">PATCH</option>
         <option value="DELETE">DELETE</option>
         <option value="HEAD">HEAD</option>
         <option value="PUT">PUT</option>
-        <!--option value="CONNECT">CONNECT</option>
-        <option value="TRACE">TRACE</option>
-        <option value="OPTIONS">OPTIONS</option-->
       </select>
     </li>
     <li>
@@ -45,28 +42,33 @@
     id="url"
     placeholder="https://example.com/api/v2/teapot"
     required
-    value="http://localhost"
+    value="https://jsonplaceholder.typicode.com/todos/1"
     />
+    <label for="fetch">
+      <input type="checkbox" id="use_fetch" name="fetch" role="switch" disabled>
+      Use Fetch API
+    </label>
+    <label for="send_header">
+      <input type="checkbox" id="send_header" name="send_header" role="switch">
+      Send Headers
+    </label>
     <label for="header">Header</label>
     <textarea
+    disabled
     type="text"
     name="header"
     id=header
     rows="6"
+    placeholder="Example:&#13;&#10;{&#13;&#10;&nbsp;&nbsp;'Content-type':'application/json',&#13;&#10;&nbsp;&nbsp;'Accepts':'application/json'&#13;&#10;}"
     ></textarea>
-    <label for="fetch">
-      <input type="checkbox" id="fetch" name="fetch" role="switch" checked>
-      Use Fetch API
-    </label>
-    <div class="data">
-      <label class="data" for="data">Data</label>
-      <textarea
-      name="data"
-      id="data"
-      rows="7"
-      placeholder='Example:&#13;&#10;{&#13;&#10;&nbsp;&nbsp;"key":"value",&#13;&#10;&nbsp;&nbsp;"secret":"403"&#13;&#10;}'
-      ></textarea>
-    </div>
+    <label class="data" for="data">Data</label>
+    <textarea
+    disabled
+    name="data"
+    id="data"
+    rows="7"
+    placeholder='Example:&#13;&#10;{&#13;&#10;&nbsp;&nbsp;"key":"value",&#13;&#10;&nbsp;&nbsp;"secret":"403"&#13;&#10;}'
+    ></textarea>
   </form>
   <div class="output-div">
     <h6>Response</h6>

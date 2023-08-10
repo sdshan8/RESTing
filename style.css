@@ -9,15 +9,14 @@ strong {
 }
 textarea {
   padding: 0.5rem;
+  font-family: 'Courier New', Courier, monospace;
 }
 code {
   width: 100%;
   background: var(--code-background-color)!important;
+  font-family: 'Courier New', Courier, monospace;
 }
 .output-div {
-  display: none;
-}
-.data {
   display: none;
 }
 button {

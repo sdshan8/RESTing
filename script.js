@@ -1,78 +1,61 @@
 function getQuery(query) {
   return document.querySelector(query)
 }
+// Inputs
 const method_selector = getQuery('#method');
 const send_btn = getQuery('#send');
 const input_form = getQuery('#inputs');
-const url = getQuery('#url');
+const send_header = getQuery('#send_header');
 const header_field = getQuery('#header');
-const rx_header_field = getQuery('#rx-header');
 const data_field = getQuery('#data');
+
+// Outputs
+const rx_header_field = getQuery('#rx-header');
 const output_div = getQuery('.output-div');
-const data_div = getQuery('.data');
 const response_element = getQuery('#response');
-const use_fetch = getQuery('#fetch');
 const response_status = getQuery('#status');
 
-document.body.onload = ()=>{
-  header.value = `{
-  "Content-type":"application/json",
-  "Accepts":"application/json"
-}`
-}
+
 method_selector.onchange = ()=>{
   if(!((method_selector.value == 'GET')||(method_selector.value == 'HEAD'))) {
-    data_div.style.display = "initial";
+    data_field.disabled = false;
   } else {
-    data_div.style.display = "none";
+    data_field.disabled = true;
+  }
+}
+send_header.onchange = ()=>{
+  if(send_header.checked) {
+    header_field.disabled = false;
+  } else {
+    header_field.disabled = true;
   }
 }
 
 const xhttp = new XMLHttpRequest();
-const send = async (header) => {
-  xhttp.open(method_selector.value, url.value, true);
-  for (var key in JSON.parse(header)){
-    xhttp.setRequestHeader(key, header[key]);
-  };
-  if ((method_selector.value == 'GET')||(method_selector.value == 'HEAD')) {
+const send = async (inputs) => {
+  xhttp.open(inputs.method, inputs.url, true);
+  if(inputs.send_header && inputs.header){
+    for (var key in JSON.parse(inputs.header)){
+      xhttp.setRequestHeader(key, header[key]);
+    };
+  }
+  xhttp.setRequestHeader('Content-type', 'application/json');
+  if (inputs.method == ("HEAD" || "GET")) {
     xhttp.send();
   } else {
-    xhttp.send(data_field.value)
+    xhttp.send(inputs.data)
   }
 }
-const send_fetch = async(header) => {
-  if ((method_selector.value == 'GET')||(method_selector.value == 'HEAD')) {
-    let response = await fetch(url.value, {
-      headers: JSON.parse(header),
-      method: method_selector.value,
-      mode: 'cors'
-    });
-    let response_header = '';
-    response.headers.forEach((value, key) => {
-      response_header += key + ': ' + value + '\n'
-    })
-    let response_json = await response.json();
-    listenter( response_header, response.status + ' ' + response.statusText, response_json )
-  } else {
-    let response = await fetch(url.value, {
-      headers: JSON.parse(header),
-      method: method_selector.value,
-      body: data_field.value,
-      mode: 'cors'
-    });
-    let response_json = await response.json();
-    let response_header = '';
-    response.headers.forEach((value, key) => {
-      response_header += key + ': ' + value + '\n'
-    })
-    listenter( response_header, response.status + ' ' + response.statusText, response_json)
-  }
-}
+
 
 xhttp.addEventListener("progress", (event)=>{
 });
 xhttp.addEventListener("load", ()=>{
-  listenter(xhttp.getAllResponseHeaders(), xhttp.status + ' ' + xhttp.statusText, JSON.parse(xhttp.responseText))
+  listenter(
+    xhttp.getAllResponseHeaders(),
+    xhttp.status + ' ' + xhttp.statusText,
+    (xhttp.responseText ? JSON.parse(xhttp.responseText) : false)
+  )
 });
 xhttp.addEventListener("error", ()=>{
   send_btn.ariaBusy = "false"
@@ -86,24 +69,24 @@ const listenter = (header, status, data)=>{
   rx_header_field.innerText = header;
   response_status.innerText = status;
   response_element.innerText = "";
-  //response_element.innerText = xhttp.responseText;
-  response_element.innerText = JSON.stringify(data, null, 2)
+  response_element.innerText = data ? JSON.stringify(data, null, 2) : ""
 }
 
 input_form.onsubmit = async (e)=>{
   e.preventDefault();
+  var formData = new FormData(e.target)
+  var inputs = {};
+  formData.forEach(function(value, key){
+    inputs[key] = value;
+  });
   send_btn.ariaBusy = "true";
   try {
-    if (use_fetch.checked) {
-      await send_fetch(header_field.value);
-    } else {
-      await send(header_field.value);
-    }
-  } catch (e) {
+    await send(inputs);
+  } catch (err) {
     send_btn.ariaBusy = "false";
     output_div.style.display = "none";
-    alert(e.message);
-    console.log(e);
+    alert(err.message);
+    console.log(err);
   }
 }
 
