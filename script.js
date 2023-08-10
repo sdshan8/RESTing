@@ -44,7 +44,8 @@ const send_fetch = async(header) => {
   if ((method_selector.value == 'GET')||(method_selector.value == 'HEAD')) {
     let response = await fetch(url.value, {
       headers: JSON.parse(header),
-      method: method_selector.value
+      method: method_selector.value,
+      mode: 'cors'
     });
     let response_header = '';
     response.headers.forEach((value, key) => {
@@ -56,7 +57,8 @@ const send_fetch = async(header) => {
     let response = await fetch(url.value, {
       headers: JSON.parse(header),
       method: method_selector.value,
-      body: data_field.value
+      body: data_field.value,
+      mode: 'cors'
     });
     let response_json = await response.json();
     let response_header = '';
