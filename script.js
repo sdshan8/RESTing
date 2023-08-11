@@ -4,7 +4,6 @@ function getQuery(query) {
 // Inputs
 const method_selector = getQuery('#method');
 const send_btn = getQuery('#send');
-const input_form = getQuery('#inputs');
 const send_header = getQuery('#send_header');
 const header_field = getQuery('#header');
 const data_field = getQuery('#data');
@@ -49,6 +48,7 @@ const send = async (inputs) => {
 
 
 xhttp.addEventListener("progress", (event)=>{
+  console.log(event)
 });
 xhttp.addEventListener("load", ()=>{
   listenter(
@@ -72,7 +72,7 @@ const listenter = (header, status, data)=>{
   response_element.innerText = data ? JSON.stringify(data, null, 2) : ""
 }
 
-input_form.onsubmit = async (e)=>{
+const send_requst = async (e)=>{
   e.preventDefault();
   var formData = new FormData(e.target)
   var inputs = {};
