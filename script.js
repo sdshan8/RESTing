@@ -44,8 +44,6 @@ const onError = (err) =>{
   output_div.style.display = "none";
   alert('Failed to send request')
 }
-xhr = new XHR(listenter, onError);
-
 
 const send_requst = async (e)=>{
   e.preventDefault();
@@ -54,10 +52,15 @@ const send_requst = async (e)=>{
   formData.forEach(function(value, key){
     inputs[key] = value;
   });
+  if(inputs.fetch){
+    this.sender = new useFetch(listenter, onError)
+  } else {
+    this.sender = new XHR(listenter, onError);
+  }
   send_btn.ariaBusy = "true";
   
   try {
-    await xhr.send(inputs)
+    await this.sender.send(inputs);
   } catch (err) {
     send_btn.ariaBusy = "false";
     output_div.style.display = "none";
